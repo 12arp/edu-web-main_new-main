@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const BACKEND_URL = 'https://sahu-final.onrender.com';
 
@@ -100,18 +100,32 @@ function ProductDetail({ product }: { product: any }) {
   );
 }
 
-async function getProduct(id: string) {
-  const res = await fetch(`${BACKEND_URL}/api/products/${id}`, { cache: 'no-store' });
-  const data = await res.json();
-  if (data.success) return data.data;
-  return null;
-}
+export default function ProductPage({ params }: { params: { id: string } }) {
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-export default async function ProductDetailPage({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/products/${params.id}`);
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [params.id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!product) {
-    return <div className="text-center text-red-500 py-12">Product not found</div>;
+    return <div>Product not found</div>;
   }
 
   return <ProductDetail product={product} />;

@@ -28,7 +28,7 @@ export const HeroSection = () => {
       setBgIndex((prev) => (prev + 1) % desktopImages.length);
     }, 5000); // 5 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [desktopImages.length]);
 
   const handlePrevImage = () => {
     setBgIndex((prev) => (prev - 1 + desktopImages.length) % desktopImages.length);

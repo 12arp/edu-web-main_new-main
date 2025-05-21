@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Image from "next/image";
 
 const BACKEND_URL = 'https://sahu-final.onrender.com';
 
@@ -282,7 +283,13 @@ const AdminPanel = () => {
         <div>
           <label className="block font-semibold mb-1">Main Image</label>
           <input type="file" onChange={handleImageUpload} accept="image/*" required={!editingProduct} />
-          {formData.image && <img src={getFullImageUrl(formData.image)} alt="Preview" className="w-32 h-24 object-contain mt-2" />}
+          {formData.image && <Image
+            src={getFullImageUrl(formData.image)}
+            alt="Preview"
+            width={300}
+            height={200}
+            className="w-32 h-24 object-contain mt-2"
+          />}
         </div>
         <div>
           <label className="block font-semibold mb-1">Additional Images</label>
@@ -290,7 +297,13 @@ const AdminPanel = () => {
           <div className="flex gap-2 mt-2 flex-wrap">
             {formData.additionalImages.map((img, index) => (
               <div key={index} className="relative">
-                <img src={getFullImageUrl(img)} alt={`Additional ${index + 1}`} className="w-20 h-16 object-contain border rounded" />
+                <Image
+                  src={getFullImageUrl(img)}
+                  alt={`Additional ${index + 1}`}
+                  width={300}
+                  height={200}
+                  className="w-20 h-16 object-contain border rounded"
+                />
                 <button type="button" className="absolute top-0 right-0 bg-red-500 text-white rounded px-1 text-xs" onClick={() => setFormData(prev => ({ ...prev, additionalImages: prev.additionalImages.filter((_, i) => i !== index) }))}>Remove</button>
               </div>
             ))}
@@ -333,7 +346,13 @@ const AdminPanel = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {products.map(product => (
             <div key={product._id} className="border rounded p-2 flex flex-col items-center">
-              <img src={getFullImageUrl(product.image)} alt={product.title} className="w-32 h-24 object-contain mb-2" />
+              <Image
+                src={getFullImageUrl(product.image)}
+                alt={product.title}
+                width={300}
+                height={200}
+                className="w-32 h-24 object-contain mb-2"
+              />
               <h3 className="font-semibold mb-1">{product.title}</h3>
               <div className="flex gap-2">
                 <button onClick={() => handleEdit(product)} className="bg-blue-500 text-white rounded px-2">Edit</button>
