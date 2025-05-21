@@ -70,10 +70,19 @@ export const Navbar = () => {
 
   const toggleLanguage = () => {
     const newLang = currentLang === 'en' ? 'hi' : 'en';
-    const cookieName = 'googtrans';
-    const cookieValue = `/en/${newLang}`;
-    document.cookie = `${cookieName}=${cookieValue}; path=/; domain=.${window.location.hostname}`;
+    
+    // Remove existing translation cookies
+    document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'googtrans=; path=/; domain=.' + window.location.hostname + '; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    
+    if (newLang === 'hi') {
+      // Set Hindi translation cookie
+      document.cookie = 'googtrans=/en/hi; path=/; domain=.' + window.location.hostname;
+    }
+    
     setCurrentLang(newLang);
+    
+    // Force reload to apply translation
     window.location.reload();
   };
 
