@@ -10,9 +10,60 @@ const getFullImageUrl = (imageUrl?: string) => {
   return `${BACKEND_URL}${imageUrl}`;
 };
 
-function ProductDetail({ product }: { product: any }) {
-  const images = [product.image, ...(product.additionalImages || [])].filter(Boolean);
+interface Product {
+  _id: string;
+  image?: string;
+  title: string;
+  description?: string;
+  additionalImages?: string[];
+  features?: string[];
+  specifications?: {
+    name: string;
+    value: string;
+  }[];
+}
+
+export default function ProductPage({ params }: { params: { id: string } }) {
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/products/${params.id}`);
+        const data = await response.json();
+        if (data.success) {
+          setProduct(data.data);
+        } else {
+          setError('Product not found');
+        }
+      } catch (err) {
+        setError('Failed to load product details');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (params.id) {
+      fetchProduct();
+    }
+  }, [params.id]);
+
+  if (loading) {
+    return <div className="text-center py-12">Loading product details...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500 py-12">{error}</div>;
+  }
+
+  if (!product) {
+    return <div className="text-center text-red-500 py-12">Product not found</div>;
+  }
+
+  const images = [product.image, ...(product.additionalImages || [])].filter((img): img is string => !!img);
 
   return (
     <div className="container py-12">
@@ -31,7 +82,7 @@ function ProductDetail({ product }: { product: any }) {
               )}
             </div>
             <div className="flex gap-2 flex-wrap justify-center">
-              {images.map((img: string, index: number) => (
+              {images.map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImageIndex(index)}
@@ -53,17 +104,17 @@ function ProductDetail({ product }: { product: any }) {
         <div className="flex-1 flex flex-col gap-4">
           <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
           <p className="text-muted-foreground mb-4">{product.description}</p>
-          {product.features?.length > 0 && (
+          {product.features && product.features.length > 0 && (
             <div className="mb-4">
               <h2 className="text-xl font-semibold mb-2">Key Features</h2>
               <ul className="list-disc pl-5">
-                {product.features.map((feature: string, index: number) => (
+                {product.features.map((feature, index) => (
                   <li key={index}>{feature}</li>
                 ))}
               </ul>
             </div>
           )}
-          {product.specifications?.length > 0 && (
+          {product.specifications && product.specifications.length > 0 && (
             <button
               className="px-4 py-2 bg-primary text-white rounded w-max mb-4"
               onClick={() => document.getElementById('specifications')?.scrollIntoView({ behavior: 'smooth' })}
@@ -73,7 +124,7 @@ function ProductDetail({ product }: { product: any }) {
           )}
         </div>
       </div>
-      {product.specifications?.length > 0 && (
+      {product.specifications && product.specifications.length > 0 && (
         <div id="specifications" className="mt-12 rounded shadow p-6 bg-muted text-foreground">
           <h2 className="text-2xl font-bold mb-4">Technical Specifications</h2>
           <div className="overflow-x-auto">
@@ -85,7 +136,7 @@ function ProductDetail({ product }: { product: any }) {
                 </tr>
               </thead>
               <tbody>
-                {product.specifications.map((spec: any, index: number) => (
+                {product.specifications.map((spec, index) => (
                   <tr key={index}>
                     <td className="px-4 py-2 border bg-muted text-foreground">{spec.name}</td>
                     <td className="px-4 py-2 border bg-muted text-foreground">{spec.value}</td>
@@ -98,35 +149,4 @@ function ProductDetail({ product }: { product: any }) {
       )}
     </div>
   );
-}
-
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(`${BACKEND_URL}/api/products/${params.id}`);
-        const data = await response.json();
-        setProduct(data);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, [params.id]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!product) {
-    return <div>Product not found</div>;
-  }
-
-  return <ProductDetail product={product} />;
 } 
