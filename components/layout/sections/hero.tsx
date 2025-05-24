@@ -42,7 +42,7 @@ export const HeroSection = () => {
     <section className="w-full min-h-screen relative overflow-hidden mb-4 md:mb-16 lg:mb-24">
       {/* Background Image - Desktop */}
       <div
-        className="absolute inset-0 z-[-2] transition-all duration-700 hidden md:block"
+        className="absolute inset-0 z-[-2] transition-all duration-700 hidden md:block -mt-3"
         style={{
           backgroundImage: `url(${desktopImages[bgIndex]})`,
           backgroundSize: "cover",
@@ -53,7 +53,7 @@ export const HeroSection = () => {
 
       {/* Background Image - Mobile */}
       <div
-        className="absolute inset-0 z-[-2] transition-all duration-700 md:hidden"
+        className="absolute inset-0 z-[-2] transition-all duration-700 md:hidden -mt-3"
         style={{
           backgroundImage: `url(${mobileImages[bgIndex]})`,
           backgroundSize: "cover",
@@ -82,7 +82,7 @@ export const HeroSection = () => {
       </button>
 
       {/* Content */}
-      <div className="relative z-10 grid place-items-start lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32 px-4 text-white">
+      <div className="relative z-10 grid place-items-start lg:max-w-screen-xl gap-8 mx-auto py-32 md:py-40 px-4 text-white">
         <div className="text-center lg:text-left space-y-8 w-full max-w-3xl">
           <Badge variant="outline" className="text-sm py-2 drop-shadow-md text-white border-white">
             <span className="mr-2 text-primary">

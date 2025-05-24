@@ -114,7 +114,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="shadow-inner bg-opacity-15 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center p-2 bg-card">
+      <header className="fixed top-4 left-0 right-0 z-50 bg-white w-[95%] md:w-[80%] lg:w-[85%] lg:max-w-screen-xl mx-auto border border-gray-200 rounded-xl flex justify-between items-center p-1.5 shadow-sm">
         <Link
           href="/"
           className="font-bold text-lg flex items-center space-x-2 hover:scale-105 transition-transform"
@@ -253,16 +253,6 @@ export const Navbar = () => {
 
         {/* Right Side Actions */}
         <div className="hidden lg:flex items-center space-x-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={toggleLanguage}
-            className="flex items-center"
-          >
-            <Languages className="h-5 w-5 mr-2" />
-            {currentLang === 'en' ? 'हिंदी' : 'ENG'}
-          </Button>
-
           <Link
             href="https://wa.me/919928398987?text=I%20have%20enquiry"
             target="_blank"
@@ -286,6 +276,17 @@ export const Navbar = () => {
           </a>
         </div>
       </header>
+
+      {/* Fixed Language Button */}
+      <Button
+        variant="secondary"
+        size="sm"
+        onClick={toggleLanguage}
+        className="fixed bottom-4 right-4 z-50 flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
+      >
+        <Languages className="h-5 w-5" />
+        {currentLang === 'en' ? 'हिंदी' : 'English'}
+      </Button>
 
       {/* Hidden Google Translate Element */}
       <div id="google_translate_element" style={{ display: 'none' }} />

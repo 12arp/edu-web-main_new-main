@@ -135,11 +135,11 @@ export default function RootLayout({
           src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
         />
       </head>
-      <body className={cn("min-h-screen bg-background", inter.className)}>
+      <body className={cn("min-h-screen bg-green-50", inter.className)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Navbar />

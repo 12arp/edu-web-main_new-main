@@ -1,8 +1,29 @@
 "use client"
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const BACKEND_URL = 'https://sahu-final.onrender.com';
+
+const formSchema = z.object({
+  name: z.string().min(2).max(255),
+  email: z.string().email(),
+  phone: z.string().min(10).max(15),
+  message: z.string().min(10),
+});
 
 const getFullImageUrl = (imageUrl?: string) => {
   if (!imageUrl) return '';
@@ -28,6 +49,24 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [showEnquiryForm, setShowEnquiryForm] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    const { name, email, phone, message } = values;
+    const mailToLink = `mailto:info@sahumetals.com?subject=Product Enquiry: ${product?.title}&body=Hello, I am ${name}, my Email is ${email}, my Phone number is ${phone}. %0D%0A%0D%0AProduct: ${product?.title}%0D%0A%0D%0AMessage: ${message}`;
+    window.location.href = mailToLink;
+    setShowEnquiryForm(false);
+  }
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -115,12 +154,20 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             </div>
           )}
           {product.specifications && product.specifications.length > 0 && (
-            <button
-              className="px-4 py-2 bg-primary text-white rounded w-max mb-4"
-              onClick={() => document.getElementById('specifications')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              View Specifications
-            </button>
+            <div className="flex gap-4 mb-4">
+              <button
+                className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
+                onClick={() => document.getElementById('specifications')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                View Specifications
+              </button>
+              <button
+                className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
+                onClick={() => setShowEnquiryForm(true)}
+              >
+                Send Enquiry
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -144,6 +191,94 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* Enquiry Form Modal */}
+      {showEnquiryForm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-background p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Send Enquiry</h2>
+              <button
+                onClick={() => setShowEnquiryForm(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="Enter your email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Number</FormLabel>
+                      <FormControl>
+                        <Input type="tel" placeholder="Enter your phone number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Enter your message"
+                          className="resize-none"
+                          rows={4}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="flex justify-end gap-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setShowEnquiryForm(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button type="submit">Send Enquiry</Button>
+                </div>
+              </form>
+            </Form>
           </div>
         </div>
       )}

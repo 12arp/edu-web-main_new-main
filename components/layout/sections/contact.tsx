@@ -55,63 +55,66 @@ export const ContactSection = () => {
   }
 
   return (
-    <section id="contact" className="container pt-0 pb-24 sm:pt-0 sm:pb-32 mb-16 sm:mb-24">
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <div className="mb-4">
-            <h2 className="text-lg text-primary mb-2 tracking-wider">
-              Contact
-            </h2>
-            <h2 className="text-3xl md:text-4xl font-bold">Connect With Sahu Metals</h2>
-          </div>
-          <p className="mb-8 text-muted-foreground lg:w-5/6">
-            Have questions about our equipment, services, or support? Reach out to Sahu Metals and our team will be happy to assist you.
-          </p>
-          <div className="flex flex-col gap-4 mb-6">
-            <div>
-              <div className="flex gap-2 mb-1">
-                <Building2 />
-                <div className="font-bold">Find us</div>
-              </div>
-              <div>G-510(1st),IPIA, Road no. 7, Anantpura, Kota, Rajasthan6</div>
-            </div>
-            <div>
-              <div className="flex gap-2 mb-1">
-                <Phone />
-                <div className="font-bold">Call us</div>
-              </div>
-              <div>+91 9928398987</div>
-              <div>+91 9829961487</div>
-              <div>+91 6378140573</div>
-            </div>
-            <div>
-              <div className="flex gap-2 mb-1">
-                <Mail />
-                <div className="font-bold">Mail US</div>
-              </div>
-              <div>info@sahumetals.com</div>
-            </div>
-            <div>
-              <div className="flex gap-2">
-                <Clock />
-                <div className="font-bold">Visit us</div>
-              </div>
+    <section id="contact" className="container pt-2 pb-24 sm:pt-4 sm:pb-32">
+      <div className="max-w-3xl mx-auto text-center mb-8">
+        <h2 className="text-lg text-primary mb-1 tracking-wider">
+          Contact
+        </h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-2">Connect With Sahu Metals</h2>
+        <p className="text-muted-foreground">
+          Have questions about our equipment, services, or support? Reach out to Sahu Metals and our team will be happy to assist you.
+        </p>
+      </div>
+
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12">
+        <div className="space-y-8">
+          <div className="flex flex-col gap-6">
+            <div className="flex items-start gap-4">
+              <Building2 className="w-6 h-6 text-primary mt-1" />
               <div>
-                <div>Monday - Friday</div>
-                <div>8AM - 4PM</div>
+                <div className="font-bold text-lg mb-1">Find us</div>
+                <div className="text-muted-foreground">G-510(1st),IPIA, Road no. 7, Anantpura, Kota, Rajasthan</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <Phone className="w-6 h-6 text-primary mt-1" />
+              <div>
+                <div className="font-bold text-lg mb-1">Call us</div>
+                <div className="text-muted-foreground">
+                  <div>+91 9928398987</div>
+                  <div>+91 9829961487</div>
+                  <div>+91 6378140573</div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <Mail className="w-6 h-6 text-primary mt-1" />
+              <div>
+                <div className="font-bold text-lg mb-1">Mail us</div>
+                <div className="text-muted-foreground">info@sahumetals.com</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <Clock className="w-6 h-6 text-primary mt-1" />
+              <div>
+                <div className="font-bold text-lg mb-1">Visit us</div>
+                <div className="text-muted-foreground">
+                  <div>Monday - Friday</div>
+                  <div>8AM - 4PM</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <Card className="bg-muted/60 dark:bg-card">
-          <CardHeader className="text-primary text-2xl"> </CardHeader>
-          <CardContent>
+
+        <Card className="bg-muted/60 dark:bg-card h-full">
+          <CardContent className="pt-6 h-full">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="grid w-full gap-4"
+                className="grid w-full gap-4 h-full"
               >
-                <div className="flex flex-col md:!flex-row gap-8">
+                <div className="flex flex-col md:!flex-row gap-4">
                   <FormField
                     control={form.control}
                     name="firstName"
@@ -119,7 +122,7 @@ export const ContactSection = () => {
                       <FormItem className="w-full">
                         <FormLabel>First Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Leopoldo" {...field} />
+                          <Input placeholder="Enter your first name" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -132,14 +135,14 @@ export const ContactSection = () => {
                       <FormItem className="w-full">
                         <FormLabel>Last Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Miranda" {...field} />
+                          <Input placeholder="Enter your last name" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
-                <div className="flex flex-col gap-1.5">
+                <div className="flex flex-col gap-4">
                   <FormField
                     control={form.control}
                     name="email"
@@ -149,7 +152,7 @@ export const ContactSection = () => {
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="leomirandadev@gmail.com"
+                            placeholder="Enter your email address"
                             {...field}
                           />
                         </FormControl>
@@ -157,8 +160,6 @@ export const ContactSection = () => {
                       </FormItem>
                     )}
                   />
-                </div>
-                <div className="flex flex-col gap-1.5">
                   <FormField
                     control={form.control}
                     name="phone"
@@ -168,7 +169,7 @@ export const ContactSection = () => {
                         <FormControl>
                           <Input
                             type="tel"
-                            placeholder="+91 1234567890"
+                            placeholder="Enter your phone number"
                             {...field}
                           />
                         </FormControl>
@@ -176,18 +177,16 @@ export const ContactSection = () => {
                       </FormItem>
                     )}
                   />
-                </div>
-                <div className="flex flex-col gap-1.5">
                   <FormField
                     control={form.control}
                     name="message"
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="flex-grow">
                         <FormLabel>Message</FormLabel>
                         <FormControl>
                           <Textarea
                             rows={5}
-                            placeholder="Your message..."
+                            placeholder="Type your message here..."
                             className="resize-none"
                             {...field}
                           />
@@ -197,24 +196,26 @@ export const ContactSection = () => {
                     )}
                   />
                 </div>
-                <Button className="mt-4">Send message</Button>
+                <Button className="mt-auto">Send message</Button>
               </form>
             </Form>
           </CardContent>
-          <CardFooter></CardFooter>
         </Card>
       </section>
-      <div className="w-full h-64 rounded overflow-hidden mt-8">
-        <iframe
-          src="https://www.google.com/maps?q=G-510(1st),IPIA,Road+no.+7,Anantpura,Kota,Rajasthan&output=embed"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen={true}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Sahu Metals Location"
-        ></iframe>
+
+      <div className="max-w-6xl mx-auto">
+        <div className="w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+          <iframe
+            src="https://www.google.com/maps?q=G-510(1st),IPIA,Road+no.+7,Anantpura,Kota,Rajasthan&output=embed"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={true}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Sahu Metals Location"
+          ></iframe>
+        </div>
       </div>
     </section>
   );

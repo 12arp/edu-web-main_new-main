@@ -31,15 +31,15 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     <Link href={`/products/${_id}`} className="block group">
       <div className="bg-muted/60 dark:bg-card rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col items-center p-4 h-full">
         <div
-          className="w-3/4 h-60 flex items-center justify-center mb-3 rounded"
+          className="w-full h-72 flex items-center justify-center mb-3 rounded"
           style={{ backgroundColor: 'var(--background-color)' }}
         >
           <Image
             src={getFullImageUrl(image)}
             alt={title}
-            width={240}
-            height={200}
-            className="object-contain w-auto h-48"
+            width={320}
+            height={280}
+            className="object-contain w-auto h-64"
             onError={(e: any) => {
               e.target.src = '/placeholder.png';
             }}
