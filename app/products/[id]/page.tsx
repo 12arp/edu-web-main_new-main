@@ -108,7 +108,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="container py-12">
+      <div className="container py-12 mt-20">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="flex-1">
             <div className="bg-background rounded shadow p-4 flex flex-col items-center">

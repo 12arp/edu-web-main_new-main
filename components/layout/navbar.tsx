@@ -1,5 +1,5 @@
 "use client";
-import { ChevronsDown, Menu, Phone, Languages, Github } from "lucide-react";
+import { ChevronsDown, Menu, Phone, Languages, Github, LogOut } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import {
   Sheet,
@@ -21,6 +21,7 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import Cookies from 'js-cookie';
 
 interface RouteProps {
   href: string;
@@ -82,6 +83,7 @@ declare global {
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState('en');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleClose = React.useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
@@ -92,7 +94,17 @@ export const Navbar = () => {
       const lang = googtransCookie.includes('/hi') ? 'hi' : 'en';
       setCurrentLang(lang);
     }
+
+    // Check for admin authentication
+    const adminAuth = Cookies.get('adminAuth');
+    setIsLoggedIn(adminAuth === 'true');
   }, []);
+
+  const handleLogout = () => {
+    Cookies.remove('adminAuth');
+    setIsLoggedIn(false);
+    window.location.href = '/';
+  };
 
   const toggleLanguage = () => {
     const newLang = currentLang === 'en' ? 'hi' : 'en';
@@ -159,6 +171,20 @@ export const Navbar = () => {
                     </Button>
                   ))}
                 </div>
+
+                {isLoggedIn && (
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      handleLogout();
+                      handleClose();
+                    }}
+                    className="justify-start text-base text-destructive hover:text-destructive/90 hover:bg-destructive/10 mt-2"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </Button>
+                )}
               </div>
 
               {/* Mobile WhatsApp and Call Buttons - Fixed at bottom */}
@@ -254,6 +280,17 @@ export const Navbar = () => {
 
         {/* Right Side Actions */}
         <div className="hidden lg:flex items-center space-x-4">
+          {isLoggedIn && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="text-destructive hover:text-destructive/90 hover:bg-destructive/10"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+          )}
           <Link
             href="https://wa.me/919876542211?text=I%20have%20enquiry"
             target="_blank"

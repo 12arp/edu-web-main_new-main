@@ -28,8 +28,7 @@ export const FooterSection = () => {
               </div>
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Mail className="w-4 h-4 text-primary" />
-                <span className="text-sm">sahumetalskota@gmail.com
-                </span>
+                <span className="text-sm">sahumetalskota@gmail.com </span>
               </div>
             </div>
           </div>
