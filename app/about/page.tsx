@@ -12,7 +12,7 @@ export default function AboutPage() {
             About Sahu Metals
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Your trusted partner in agricultural excellence since 2010. We&apos;re committed to empowering farmers with innovative equipment solutions and exceptional service.
+            Your trusted partner in agricultural excellence since 1990. We&apos;re committed to empowering farmers with innovative equipment solutions and exceptional service.
           </p>
         </div>
 

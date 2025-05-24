@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Building2, Phone, Mail, Clock } from "lucide-react";
+import { FooterSection } from "@/components/layout/sections/footer";
 
 const BACKEND_URL = 'https://sahu-final.onrender.com';
 
@@ -105,183 +107,186 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const images = [product.image, ...(product.additionalImages || [])].filter((img): img is string => !!img);
 
   return (
-    <div className="container py-12">
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="flex-1">
-          <div className="bg-background rounded shadow p-4 flex flex-col items-center">
-            <div className="w-full h-80 flex items-center justify-center mb-4 bg-[#e6ffe6] rounded">
-              {images[selectedImageIndex] && (
-                <Image
-                  src={getFullImageUrl(images[selectedImageIndex])}
-                  alt={product.title}
-                  width={400}
-                  height={320}
-                  className="object-contain w-auto h-72"
-                />
-              )}
-            </div>
-            <div className="flex gap-2 flex-wrap justify-center">
-              {images.map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImageIndex(index)}
-                  className={`border rounded p-1 transition ${selectedImageIndex === index ? 'border-primary' : 'border-transparent'}`}
-                  style={{ outline: 'none' }}
-                >
+    <>
+      <div className="container py-12">
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex-1">
+            <div className="bg-background rounded shadow p-4 flex flex-col items-center">
+              <div className="w-full h-80 flex items-center justify-center mb-4 bg-[#e6ffe6] rounded">
+                {images[selectedImageIndex] && (
                   <Image
-                    src={getFullImageUrl(img)}
-                    alt={`${product.title} View ${index + 1}`}
-                    width={64}
-                    height={48}
-                    className="object-contain w-16 h-12"
+                    src={getFullImageUrl(images[selectedImageIndex])}
+                    alt={product.title}
+                    width={400}
+                    height={320}
+                    className="object-contain w-auto h-72"
                   />
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="flex-1 flex flex-col gap-4">
-          <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
-          <p className="text-muted-foreground mb-4">{product.description}</p>
-          {product.features && product.features.length > 0 && (
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold mb-2">Key Features</h2>
-              <ul className="list-disc pl-5">
-                {product.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {product.specifications && product.specifications.length > 0 && (
-            <div className="flex gap-4 mb-4">
-              <button
-                className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
-                onClick={() => document.getElementById('specifications')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                View Specifications
-              </button>
-              <button
-                className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
-                onClick={() => setShowEnquiryForm(true)}
-              >
-                Send Enquiry
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-      {product.specifications && product.specifications.length > 0 && (
-        <div id="specifications" className="mt-12 rounded shadow p-6 bg-muted text-foreground">
-          <h2 className="text-2xl font-bold mb-4">Technical Specifications</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full border">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 border bg-background text-foreground">Name</th>
-                  <th className="px-4 py-2 border bg-background text-foreground">Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {product.specifications.map((spec, index) => (
-                  <tr key={index}>
-                    <td className="px-4 py-2 border bg-muted text-foreground">{spec.name}</td>
-                    <td className="px-4 py-2 border bg-muted text-foreground">{spec.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* Enquiry Form Modal */}
-      {showEnquiryForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-background p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Send Enquiry</h2>
-              <button
-                onClick={() => setShowEnquiryForm(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                ✕
-              </button>
-            </div>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="Enter your email" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone Number</FormLabel>
-                      <FormControl>
-                        <Input type="tel" placeholder="Enter your phone number" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Enter your message"
-                          className="resize-none"
-                          rows={4}
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <div className="flex justify-end gap-4">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setShowEnquiryForm(false)}
+                )}
+              </div>
+              <div className="flex gap-2 flex-wrap justify-center">
+                {images.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`border rounded p-1 transition ${selectedImageIndex === index ? 'border-primary' : 'border-transparent'}`}
+                    style={{ outline: 'none' }}
                   >
-                    Cancel
-                  </Button>
-                  <Button type="submit">Send Enquiry</Button>
-                </div>
-              </form>
-            </Form>
+                    <Image
+                      src={getFullImageUrl(img)}
+                      alt={`${product.title} View ${index + 1}`}
+                      width={64}
+                      height={48}
+                      className="object-contain w-16 h-12"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="flex-1 flex flex-col gap-4">
+            <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
+            <p className="text-muted-foreground mb-4">{product.description}</p>
+            {product.features && product.features.length > 0 && (
+              <div className="mb-4">
+                <h2 className="text-xl font-semibold mb-2">Key Features</h2>
+                <ul className="list-disc pl-5">
+                  {product.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {product.specifications && product.specifications.length > 0 && (
+              <div className="flex gap-4 mb-4">
+                <button
+                  className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
+                  onClick={() => document.getElementById('specifications')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  View Specifications
+                </button>
+                <button
+                  className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
+                  onClick={() => setShowEnquiryForm(true)}
+                >
+                  Send Enquiry
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </div>
+        {product.specifications && product.specifications.length > 0 && (
+          <div id="specifications" className="mt-12 rounded shadow p-6 bg-muted text-foreground">
+            <h2 className="text-2xl font-bold mb-4">Technical Specifications</h2>
+            <div className="overflow-x-auto">
+              <table className="min-w-full border">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-2 border bg-background text-foreground">Name</th>
+                    <th className="px-4 py-2 border bg-background text-foreground">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {product.specifications.map((spec, index) => (
+                    <tr key={index}>
+                      <td className="px-4 py-2 border bg-muted text-foreground">{spec.name}</td>
+                      <td className="px-4 py-2 border bg-muted text-foreground">{spec.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Enquiry Form Modal */}
+        {showEnquiryForm && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-background p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold">Send Enquiry</h2>
+                <button
+                  onClick={() => setShowEnquiryForm(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  ✕
+                </button>
+              </div>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="Enter your email" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone Number</FormLabel>
+                        <FormControl>
+                          <Input type="tel" placeholder="Enter your phone number" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Enter your message"
+                            className="resize-none"
+                            rows={4}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className="flex justify-end gap-4">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowEnquiryForm(false)}
+                    >
+                      Cancel
+                    </Button>
+                    <Button type="submit">Send Enquiry</Button>
+                  </div>
+                </form>
+              </Form>
+            </div>
+          </div>
+        )}
+      </div>
+      <FooterSection />
+    </>
   );
 } 

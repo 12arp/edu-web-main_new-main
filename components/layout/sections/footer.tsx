@@ -15,20 +15,21 @@ export const FooterSection = () => {
               <span className="font-bold text-xl">Sahu Metals</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Your trusted partner in agricultural excellence since 2010. We&apos;re committed to empowering farmers with innovative equipment solutions and exceptional service.
+              Your trusted partner in agricultural excellence since 1990. We&apos;re committed to empowering farmers with innovative equipment solutions and exceptional service.
             </p>
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Building2 className="w-4 h-4 text-primary" />
-                <span className="text-sm">123 Industrial Area, City, State</span>
+                <span className="text-sm">G -510(1st), IPIA, road no. 7, Anatpura, kota, Rajasthan, (Sahu metals)</span>
               </div>
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Phone className="w-4 h-4 text-primary" />
-                <span className="text-sm">+91 9876542211</span>
+                <span className="text-sm">+91 9928398987</span>
               </div>
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Mail className="w-4 h-4 text-primary" />
-                <span className="text-sm">info@sahumetals.com</span>
+                <span className="text-sm">sahumetalskota@gmail.com
+                </span>
               </div>
             </div>
           </div>

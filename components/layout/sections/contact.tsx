@@ -91,7 +91,8 @@ export const ContactSection = () => {
               <Mail className="w-6 h-6 text-primary mt-1" />
               <div>
                 <div className="font-bold text-lg mb-1">Mail us</div>
-                <div className="text-muted-foreground">info@sahumetals.com</div>
+                <div className="text-muted-foreground">sahumetalskota@gmail.com
+                </div>
               </div>
             </div>
             <div className="flex items-start gap-4">
