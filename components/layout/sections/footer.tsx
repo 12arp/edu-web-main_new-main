@@ -30,7 +30,7 @@ export const FooterSection = () => {
               </div>
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Phone className="w-4 h-4 text-primary" />
-                <span className="text-sm">+91 9928398987</span>
+                <span className="text-sm">+91 9876542211</span>
               </div>
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Mail className="w-4 h-4 text-primary" />
@@ -54,8 +54,8 @@ export const FooterSection = () => {
           <div className="flex flex-col gap-4 text-center md:text-left">
             <h3 className="font-bold text-lg text-primary">Contact & Support</h3>
             <div className="flex flex-col gap-2">
-              <Link href="https://wa.me/919928398987" target="_blank" className="text-sm hover:text-primary transition">WhatsApp Support</Link>
-              <Link href="tel:+919928398987" className="text-sm hover:text-primary transition">Call Us</Link>
+              <Link href="https://wa.me/919876542211" target="_blank" className="text-sm hover:text-primary transition">WhatsApp Support</Link>
+              <Link href="tel:+919876542211" className="text-sm hover:text-primary transition">Call Us</Link>
               <Link href="mailto:info@sahumetals.com" className="text-sm hover:text-primary transition">Email Us</Link>
               <Link href="#faq" className="text-sm hover:text-primary transition">FAQ</Link>
             </div>
