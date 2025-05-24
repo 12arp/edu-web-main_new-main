@@ -161,9 +161,9 @@ export const Navbar = () => {
                 </div>
 
                 {/* Mobile WhatsApp and Call Buttons */}
-                <div className="flex gap-4 px-4 mt-4">
+                <div className="flex items-center gap-2 mt-4">
                   <Link
-                    href="https://wa.me/919928398987?text=I%20have%20enquiry"
+                    href="https://wa.me/9876542211?text=I%20have%20enquiry"
                     target="_blank"
                     className="transition-transform hover:scale-105"
                   >
@@ -176,7 +176,7 @@ export const Navbar = () => {
                     />
                   </Link>
                   <a
-                    href="tel:+919928398987"
+                    href="tel:+9876542211"
                     className="transition-transform hover:scale-110"
                   >
                     <Button variant="ghost" size="icon">
@@ -254,7 +254,7 @@ export const Navbar = () => {
         {/* Right Side Actions */}
         <div className="hidden lg:flex items-center space-x-4">
           <Link
-            href="https://wa.me/919928398987?text=I%20have%20enquiry"
+            href="https://wa.me/919876542211?text=I%20have%20enquiry"
             target="_blank"
             className="transition-transform hover:scale-105"
           >
@@ -267,7 +267,7 @@ export const Navbar = () => {
             />
           </Link>
           <a
-            href="tel:+919928398987"
+            href="tel:+919876542211"
             className="transition-transform hover:scale-110"
           >
             <Button variant="ghost" size="icon">
