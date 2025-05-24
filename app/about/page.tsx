@@ -10,7 +10,7 @@ export default function AboutPage() {
           About Sahu Metals
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Your trusted partner in agricultural excellence since 2010. We're committed to empowering farmers with innovative equipment solutions and exceptional service.
+          Your trusted partner in agricultural excellence since 2010. We&apos;re committed to empowering farmers with innovative equipment solutions and exceptional service.
         </p>
       </div>
 
@@ -35,7 +35,7 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold">Our Vision</h2>
             </div>
             <p className="text-muted-foreground">
-              To be India's leading agricultural equipment provider, known for innovation, reliability, and farmer-centric solutions that drive agricultural growth and sustainability.
+              To be India&apos;s leading agricultural equipment provider, known for innovation, reliability, and farmer-centric solutions that drive agricultural growth and sustainability.
             </p>
           </CardContent>
         </Card>
@@ -52,7 +52,7 @@ export default function AboutPage() {
                 <h3 className="text-xl font-bold">Customer First</h3>
               </div>
               <p className="text-muted-foreground">
-                We prioritize our customers' needs, providing personalized solutions and exceptional service at every step.
+                We prioritize our customers&apos; needs, providing personalized solutions and exceptional service at every step.
               </p>
             </CardContent>
           </Card>
@@ -76,7 +76,7 @@ export default function AboutPage() {
                 <h3 className="text-xl font-bold">Sustainable Growth</h3>
               </div>
               <p className="text-muted-foreground">
-                We're committed to sustainable practices that benefit farmers, communities, and the environment.
+                We&apos;re committed to sustainable practices that benefit farmers, communities, and the environment.
               </p>
             </CardContent>
           </Card>

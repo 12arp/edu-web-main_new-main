@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Building2, Mail, Phone } from "lucide-react";
+import Image from 'next/image';
 
 export const FooterSection = () => {
   return (
@@ -10,7 +11,13 @@ export const FooterSection = () => {
           {/* Company Info */}
           <div className="flex flex-col gap-4 text-center md:text-left">
             <Link href="/" className="flex items-center gap-3 justify-center md:justify-start">
-              <img src="/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png" alt="Sahu Metals Logo" className="w-12 h-12 rounded-lg border border-secondary bg-white p-1 shadow" />
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={32}
+                height={32}
+                className="h-8 w-auto"
+              />
               <span className="text-2xl font-bold text-primary">Sahu Metals</span>
             </Link>
             <p className="text-sm text-muted-foreground">
