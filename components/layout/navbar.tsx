@@ -136,7 +136,7 @@ export const Navbar = () => {
               side="left"
               className="flex flex-col justify-between rounded-tr-2xl rounded-br-2xl bg-card border-secondary"
             >
-              <div>
+              <div className="flex flex-col h-full">
                 <SheetHeader className="mb-4 ml-4">
                   <SheetTitle className="flex items-center">
                     <Link href="/" className="flex items-center" onClick={handleClose}>
@@ -159,13 +159,15 @@ export const Navbar = () => {
                     </Button>
                   ))}
                 </div>
+              </div>
 
-                {/* Mobile WhatsApp and Call Buttons */}
-                <div className="flex flex-col gap-2 mt-4 px-8">
+              {/* Mobile WhatsApp and Call Buttons - Fixed at bottom */}
+              <div className="mt-auto border-t border-secondary">
+                <div className="flex flex-col gap-2 p-4">
                   <Link
                     href="https://wa.me/919876542211?text=I%20have%20enquiry"
                     target="_blank"
-                    className="flex items-center gap-2 text-sm hover:text-primary transition"
+                    className="flex items-center gap-2 text-sm hover:text-primary transition bg-muted/50 p-3 rounded-lg"
                   >
                     <Image
                       src="/wh491wad6-whatsapp-icon-logo-whatsapp-icon-whatsapp-logo-call-logo-instagram-logo-new.png"
@@ -174,11 +176,11 @@ export const Navbar = () => {
                       height={24}
                       className="rounded-md"
                     />
-                    <span>WhatsApp</span>
+                    <span>WhatsApp Support</span>
                   </Link>
                   <a
                     href="tel:+919876542211"
-                    className="flex items-center gap-2 text-sm hover:text-primary transition"
+                    className="flex items-center gap-2 text-sm hover:text-primary transition bg-muted/50 p-3 rounded-lg"
                   >
                     <Phone className="h-5 w-5" />
                     <span>Call Us</span>
@@ -186,8 +188,7 @@ export const Navbar = () => {
                 </div>
               </div>
 
-              <SheetFooter className="flex-col items-start p-4">
-                <Separator className="mb-2" />
+              <SheetFooter className="flex-col items-start p-4 border-t border-secondary">
                 <Button
                   variant="ghost"
                   onClick={toggleLanguage}
