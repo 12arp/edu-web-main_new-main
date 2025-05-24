@@ -161,27 +161,27 @@ export const Navbar = () => {
                 </div>
 
                 {/* Mobile WhatsApp and Call Buttons */}
-                <div className="flex items-center gap-2 mt-4">
+                <div className="flex flex-col gap-2 mt-4 px-8">
                   <Link
-                    href="https://wa.me/9876542211?text=I%20have%20enquiry"
+                    href="https://wa.me/919876542211?text=I%20have%20enquiry"
                     target="_blank"
-                    className="transition-transform hover:scale-105"
+                    className="flex items-center gap-2 text-sm hover:text-primary transition"
                   >
                     <Image
                       src="/wh491wad6-whatsapp-icon-logo-whatsapp-icon-whatsapp-logo-call-logo-instagram-logo-new.png"
                       alt="WhatsApp"
-                      width={32}
-                      height={20}
+                      width={24}
+                      height={24}
                       className="rounded-md"
                     />
+                    <span>WhatsApp</span>
                   </Link>
                   <a
-                    href="tel:+9876542211"
-                    className="transition-transform hover:scale-110"
+                    href="tel:+919876542211"
+                    className="flex items-center gap-2 text-sm hover:text-primary transition"
                   >
-                    <Button variant="ghost" size="icon">
-                      <Phone className="h-5 w-5" />
-                    </Button>
+                    <Phone className="h-5 w-5" />
+                    <span>Call Us</span>
                   </a>
                 </div>
               </div>
