@@ -41,7 +41,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <section className="container py-8">
+      <section className="container py-24 md:py-32">
         <p className="text-primary text-center mb-2 tracking-wider">Products</p>
         <h2 className="text-3xl md:text-4xl text-center font-bold mb-8">Our Products</h2>
         <div className="flex flex-col gap-12">

@@ -298,7 +298,7 @@ const AdminPanel = () => {
                 <span>Mark as featured</span>
               </label>
             </div>
-          </div>
+        </div>
 
           <div className="space-y-2">
             <label className="block font-semibold">Description</label>
@@ -309,7 +309,7 @@ const AdminPanel = () => {
               className="w-full border rounded-md px-4 py-2 min-h-[100px] focus:ring-2 focus:ring-primary/20 focus:border-primary" 
               required 
             />
-          </div>
+        </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="space-y-2">
@@ -324,15 +324,15 @@ const AdminPanel = () => {
               {formData.image && (
                 <div className="mt-2">
                   <Image
-                    src={getFullImageUrl(formData.image)}
-                    alt="Preview"
-                    width={300}
-                    height={200}
+            src={getFullImageUrl(formData.image)}
+            alt="Preview"
+            width={300}
+            height={200}
                     className="w-full max-w-[200px] h-auto object-contain rounded-md border"
                   />
                 </div>
               )}
-            </div>
+        </div>
 
             <div className="space-y-2">
               <label className="block font-semibold">Additional Images</label>
@@ -343,15 +343,15 @@ const AdminPanel = () => {
                 className="w-full p-2 border rounded-md" 
               />
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mt-2">
-                {formData.additionalImages.map((img, index) => (
+            {formData.additionalImages.map((img, index) => (
                   <div key={index} className="relative group">
-                    <Image
-                      src={getFullImageUrl(img)}
-                      alt={`Additional ${index + 1}`}
+                <Image
+                  src={getFullImageUrl(img)}
+                  alt={`Additional ${index + 1}`}
                       width={100}
                       height={100}
                       className="w-full h-24 object-contain border rounded-md"
-                    />
+                />
                     <button
                       type="button"
                       className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -359,16 +359,16 @@ const AdminPanel = () => {
                     >
                       ✕
                     </button>
-                  </div>
-                ))}
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
           </div>
 
           <div className="space-y-4">
             <label className="block font-semibold">Features</label>
             <div className="space-y-2">
-              {formData.features.map((feature, index) => (
+          {formData.features.map((feature, index) => (
                 <div key={index} className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="text"
@@ -394,12 +394,12 @@ const AdminPanel = () => {
             >
               Add Feature
             </button>
-          </div>
+        </div>
 
           <div className="space-y-4">
             <label className="block font-semibold">Specifications</label>
             <div className="space-y-2">
-              {formData.specifications.map((spec, index) => (
+          {formData.specifications.map((spec, index) => (
                 <div key={index} className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <input
                     type="text"
@@ -434,7 +434,7 @@ const AdminPanel = () => {
             >
               Add Specification
             </button>
-          </div>
+        </div>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <button
@@ -453,21 +453,21 @@ const AdminPanel = () => {
                 Cancel
               </button>
             )}
-          </div>
-        </form>
+        </div>
+      </form>
 
         <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
           <h2 className="text-xl md:text-2xl font-bold mb-6">Existing Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {products.map(product => (
+          {products.map(product => (
               <div key={product._id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
                 <div className="aspect-square relative mb-4 bg-gray-50 rounded-md overflow-hidden">
-                  <Image
-                    src={getFullImageUrl(product.image)}
-                    alt={product.title}
+              <Image
+                src={getFullImageUrl(product.image)}
+                alt={product.title}
                     fill
                     className="object-contain p-2"
-                  />
+              />
                 </div>
                 <h3 className="font-semibold mb-2 line-clamp-2">{product.title}</h3>
                 <div className="flex flex-col sm:flex-row gap-2">
@@ -486,7 +486,7 @@ const AdminPanel = () => {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
         </div>
       </div>
     </div>

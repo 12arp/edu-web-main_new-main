@@ -9,8 +9,33 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Shadcn - Landing template",
-  description: "Landing template from Shadcn",
+  title: "Sahu Metals - Agriculture Equipment Agency",
+  description: "Your trusted partner in agricultural excellence since 1990. We're committed to empowering farmers with innovative equipment solutions and exceptional service.",
+  icons: {
+    icon: '/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png',
+    apple: '/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png',
+  },
+  openGraph: {
+    type: "website",
+    url: "https://sahumetals.com/",
+    title: "Sahu Metals - Agriculture Equipment Agency",
+    description: "Your trusted partner in agricultural excellence since 1990. We're committed to empowering farmers with innovative equipment solutions and exceptional service.",
+    images: [
+      {
+        url: "/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png",
+        width: 1200,
+        height: 630,
+        alt: "Sahu Metals Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "https://sahumetals.com/",
+    title: "Sahu Metals - Agriculture Equipment Agency",
+    description: "Your trusted partner in agricultural excellence since 1990. We're committed to empowering farmers with innovative equipment solutions and exceptional service.",
+    images: ["/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png"],
+  },
 };
 
 export default function RootLayout({
