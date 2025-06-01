@@ -2,40 +2,46 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+const DESKTOP_IMAGES = [
+  "/farm-equipment-3247630_1280.jpg",
+  "/tractor-5102202_1280.jpg",
+  "/harvester-3562476_1280.jpg",
+  "/turnip-8266093_1280.jpg",
+];
+
+const MOBILE_IMAGES = [
+  "/mobile-hero/1.jpg",
+  "/mobile-hero/2.jpg",
+  "/mobile-hero/3.jpg",
+  "/mobile-hero/HD-wallpaper-farming-industrial-john-deere-tractor.jpg",
+];
+
+const TRANSITION_DURATION = 700;
+const BACKGROUND_STYLE = {
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+};
+
 export const HeroSection = () => {
-  const { theme } = useTheme();
-  const desktopImages = [
-    "/farm-equipment-3247630_1280.jpg",
-    "/tractor-5102202_1280.jpg",
-    "/harvester-3562476_1280.jpg",
-    "/turnip-8266093_1280.jpg",
-  ];
-  const mobileImages = [
-    "/mobile-hero/1.jpg",
-    "/mobile-hero/2.jpg",
-    "/mobile-hero/3.jpg",
-    "/mobile-hero/HD-wallpaper-farming-industrial-john-deere-tractor.jpg",
-  ];
   const [bgIndex, setBgIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % desktopImages.length);
-    }, 5000); // 5 seconds
+      setBgIndex((prev) => (prev + 1) % DESKTOP_IMAGES.length);
+    }, 5000);
     return () => clearInterval(interval);
-  }, [desktopImages.length]);
+  }, []);
 
   const handlePrevImage = () => {
-    setBgIndex((prev) => (prev - 1 + desktopImages.length) % desktopImages.length);
+    setBgIndex((prev) => (prev - 1 + DESKTOP_IMAGES.length) % DESKTOP_IMAGES.length);
   };
 
   const handleNextImage = () => {
-    setBgIndex((prev) => (prev + 1) % desktopImages.length);
+    setBgIndex((prev) => (prev + 1) % DESKTOP_IMAGES.length);
   };
 
   return (
@@ -44,10 +50,8 @@ export const HeroSection = () => {
       <div
         className="absolute inset-0 z-[-2] transition-all duration-700 hidden md:block -mt-3"
         style={{
-          backgroundImage: `url(${desktopImages[bgIndex]})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          backgroundImage: `url(${DESKTOP_IMAGES[bgIndex]})`,
+          ...BACKGROUND_STYLE,
         }}
       />
 
@@ -55,10 +59,8 @@ export const HeroSection = () => {
       <div
         className="absolute inset-0 z-[-2] transition-all duration-700 md:hidden -mt-3"
         style={{
-          backgroundImage: `url(${mobileImages[bgIndex]})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          backgroundImage: `url(${MOBILE_IMAGES[bgIndex]})`,
+          ...BACKGROUND_STYLE,
         }}
       />
 

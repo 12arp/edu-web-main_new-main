@@ -1,5 +1,5 @@
 "use client";
-import { ChevronsDown, Menu, Phone, Languages, Github, LogOut } from "lucide-react";
+import { Menu, Phone, Languages, LogOut as LogoutIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import {
   Sheet,
@@ -9,7 +9,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { Separator } from "../ui/separator";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -55,30 +54,10 @@ const featureList: FeatureProps[] = [
   },
 ];
 
-// Add TypeScript declarations for Google Translate
-declare global {
-  interface Window {
-    googleTranslateElementInit: () => void;
-    google: {
-      translate: {
-        TranslateElement: {
-          new (
-            options: {
-              pageLanguage: string;
-              includedLanguages: string;
-              layout: number;
-              autoDisplay?: boolean;
-            },
-            elementId: string
-          ): void;
-          InlineLayout: {
-            SIMPLE: number;
-          };
-        };
-      };
-    };
-  }
-}
+const WHATSAPP_LINK = "https://wa.me/919876542211?text=I%20have%20enquiry";
+const PHONE_NUMBER = "+919876542211";
+const LOGO_PATH = "/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png";
+const WHATSAPP_ICON = "/wh491wad6-whatsapp-icon-logo-whatsapp-icon-whatsapp-logo-call-logo-instagram-logo-new.png";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,17 +66,12 @@ export const Navbar = () => {
   const handleClose = React.useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
-    // Check for existing language preference
     const cookies = document.cookie.split(';');
     const googtransCookie = cookies.find(cookie => cookie.trim().startsWith('googtrans='));
     if (googtransCookie) {
-      const lang = googtransCookie.includes('/hi') ? 'hi' : 'en';
-      setCurrentLang(lang);
+      setCurrentLang(googtransCookie.includes('/hi') ? 'hi' : 'en');
     }
-
-    // Check for admin authentication
-    const adminAuth = Cookies.get('adminAuth');
-    setIsLoggedIn(adminAuth === 'true');
+    setIsLoggedIn(Cookies.get('adminAuth') === 'true');
   }, []);
 
   const handleLogout = () => {
@@ -108,21 +82,30 @@ export const Navbar = () => {
 
   const toggleLanguage = () => {
     const newLang = currentLang === 'en' ? 'hi' : 'en';
-    
-    // Remove existing translation cookies
     document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     document.cookie = 'googtrans=; path=/; domain=.' + window.location.hostname + '; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     
     if (newLang === 'hi') {
-      // Set Hindi translation cookie
       document.cookie = 'googtrans=/en/hi; path=/; domain=.' + window.location.hostname;
     }
     
     setCurrentLang(newLang);
-    
-    // Force reload to apply translation
     window.location.reload();
   };
+
+  const renderNavigationLinks = (onClick?: () => void) => (
+    routeList.map(({ href, label }) => (
+      <Button
+        key={href}
+        asChild
+        variant="ghost"
+        className="justify-start text-base transition hover:translate-x-1"
+        onClick={onClick}
+      >
+        <Link href={href}>{label}</Link>
+      </Button>
+    ))
+  );
 
   return (
     <>
@@ -131,11 +114,10 @@ export const Navbar = () => {
           href="/"
           className="font-bold text-lg flex items-center space-x-2 hover:scale-105 transition-transform"
         >
-          <Image src="/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png" alt="Sahu Metals Logo" width={36} height={36} className="rounded-lg" />
+          <Image src={LOGO_PATH} alt="Sahu Metals Logo" width={36} height={36} className="rounded-lg" />
           <span className="text-foreground">Sahu Metals</span>
         </Link>
 
-        {/* Mobile Nav */}
         <div className="flex items-center lg:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -152,24 +134,14 @@ export const Navbar = () => {
                 <SheetHeader className="mb-4 ml-4">
                   <SheetTitle className="flex items-center">
                     <Link href="/" className="flex items-center" onClick={handleClose}>
-                      <Image src="/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png" alt="Sahu Metals Logo" width={36} height={36} className="rounded-lg" />
+                      <Image src={LOGO_PATH} alt="Sahu Metals Logo" width={36} height={36} className="rounded-lg" />
                       <span className="ml-2 font-semibold text-lg">Sahu Metals</span>
                     </Link>
                   </SheetTitle>
                 </SheetHeader>
 
                 <div className="flex flex-col gap-2 px-4">
-                  {routeList.map(({ href, label }) => (
-                    <Button
-                      key={href}
-                      asChild
-                      variant="ghost"
-                      className="justify-start text-base transition hover:translate-x-1"
-                      onClick={handleClose}
-                    >
-                      <Link href={href}>{label}</Link>
-                    </Button>
-                  ))}
+                  {renderNavigationLinks(handleClose)}
                 </div>
 
                 {isLoggedIn && (
@@ -181,22 +153,21 @@ export const Navbar = () => {
                     }}
                     className="justify-start text-base text-destructive hover:text-destructive/90 hover:bg-destructive/10 mt-2"
                   >
-                    <LogOut className="h-4 w-4 mr-2" />
+                    <LogoutIcon className="h-4 w-4 mr-2" />
                     Logout
                   </Button>
                 )}
               </div>
 
-              {/* Mobile WhatsApp and Call Buttons - Fixed at bottom */}
               <div className="mt-auto border-t border-secondary">
                 <div className="flex flex-col gap-2 p-4">
                   <Link
-                    href="https://wa.me/919876542211?text=I%20have%20enquiry"
+                    href={WHATSAPP_LINK}
                     target="_blank"
                     className="flex items-center gap-2 text-sm hover:text-primary transition bg-muted/50 p-3 rounded-lg"
                   >
                     <Image
-                      src="/wh491wad6-whatsapp-icon-logo-whatsapp-icon-whatsapp-logo-call-logo-instagram-logo-new.png"
+                      src={WHATSAPP_ICON}
                       alt="WhatsApp"
                       width={24}
                       height={24}
@@ -205,7 +176,7 @@ export const Navbar = () => {
                     <span>WhatsApp Support</span>
                   </Link>
                   <a
-                    href="tel:+919876542211"
+                    href={`tel:${PHONE_NUMBER}`}
                     className="flex items-center gap-2 text-sm hover:text-primary transition bg-muted/50 p-3 rounded-lg"
                   >
                     <Phone className="h-5 w-5" />
@@ -228,7 +199,6 @@ export const Navbar = () => {
           </Sheet>
         </div>
 
-        {/* Desktop Nav */}
         <NavigationMenu className="hidden lg:block mx-auto">
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -238,7 +208,7 @@ export const Navbar = () => {
               <NavigationMenuContent>
                 <div className="grid w-[600px] grid-cols-2 gap-5 p-4">
                   <Image
-                    src="/61ee283f-278d-43e8-8c23-8e0cdbbc61d6.png"
+                    src={LOGO_PATH}
                     alt="Sahu Metals"
                     className="h-full w-full rounded-md object-cover"
                     width={600}
@@ -278,7 +248,6 @@ export const Navbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Right Side Actions */}
         <div className="hidden lg:flex items-center space-x-4">
           {isLoggedIn && (
             <Button
@@ -287,17 +256,17 @@ export const Navbar = () => {
               onClick={handleLogout}
               className="text-destructive hover:text-destructive/90 hover:bg-destructive/10"
             >
-              <LogOut className="h-4 w-4 mr-2" />
+              <LogoutIcon className="h-4 w-4 mr-2" />
               Logout
             </Button>
           )}
           <Link
-            href="https://wa.me/919876542211?text=I%20have%20enquiry"
+            href={WHATSAPP_LINK}
             target="_blank"
             className="transition-transform hover:scale-105"
           >
             <Image
-              src="/wh491wad6-whatsapp-icon-logo-whatsapp-icon-whatsapp-logo-call-logo-instagram-logo-new.png"
+              src={WHATSAPP_ICON}
               alt="WhatsApp"
               width={40}
               height={24}
@@ -305,7 +274,7 @@ export const Navbar = () => {
             />
           </Link>
           <a
-            href="tel:+919876542211"
+            href={`tel:${PHONE_NUMBER}`}
             className="transition-transform hover:scale-110"
           >
             <Button variant="ghost" size="icon">
@@ -315,7 +284,6 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {/* Fixed Language Button */}
       <Button
         variant="secondary"
         size="sm"
@@ -326,7 +294,6 @@ export const Navbar = () => {
         {currentLang === 'en' ? 'हिंदी' : 'English'}
       </Button>
 
-      {/* Hidden Google Translate Element */}
       <div id="google_translate_element" style={{ display: 'none' }} />
     </>
   );
