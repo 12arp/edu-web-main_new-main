@@ -17,7 +17,6 @@ interface Product {
   additionalImages: string[];
   features: string[];
   specifications: { name: string; value: string }[];
-  isFeatured: boolean;
 }
 
 const AdminPanel = () => {
@@ -29,15 +28,13 @@ const AdminPanel = () => {
     additionalImages: string[];
     features: string[];
     specifications: { name: string; value: string }[];
-    isFeatured: boolean;
   }>({
     title: '',
     description: '',
     image: '',
     additionalImages: [],
     features: [''],
-    specifications: [{ name: '', value: '' }],
-    isFeatured: false
+    specifications: [{ name: '', value: '' }]
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -70,8 +67,7 @@ const AdminPanel = () => {
       image: product.image,
       additionalImages: product.additionalImages || [],
       features: product.features || [''],
-      specifications: product.specifications || [{ name: '', value: '' }],
-      isFeatured: product.isFeatured || false
+      specifications: product.specifications || [{ name: '', value: '' }]
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -219,8 +215,7 @@ const AdminPanel = () => {
           image: '',
           additionalImages: [],
           features: [''],
-          specifications: [{ name: '', value: '' }],
-          isFeatured: false
+          specifications: [{ name: '', value: '' }]
         });
         setEditingProduct(null);
         fetchProducts();
@@ -242,8 +237,7 @@ const AdminPanel = () => {
       image: '',
       additionalImages: [],
       features: [''],
-      specifications: [{ name: '', value: '' }],
-      isFeatured: false
+      specifications: [{ name: '', value: '' }]
     });
     setError(null);
     setSuccess(null);
@@ -285,20 +279,7 @@ const AdminPanel = () => {
                 required 
               />
             </div>
-            <div className="space-y-2">
-              <label className="block font-semibold">Featured Product</label>
-              <label className="inline-flex items-center gap-2 mt-2">
-                <input 
-                  type="checkbox" 
-                  name="isFeatured" 
-                  checked={formData.isFeatured} 
-                  onChange={handleChange} 
-                  className="rounded border-gray-300" 
-                />
-                <span>Mark as featured</span>
-              </label>
-            </div>
-        </div>
+          </div>
 
           <div className="space-y-2">
             <label className="block font-semibold">Description</label>
