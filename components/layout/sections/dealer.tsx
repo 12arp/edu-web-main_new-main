@@ -98,7 +98,8 @@ export const DealerSection = () => {
             <CardTitle className="text-2xl">Apply to Become a Dealer</CardTitle>
           </CardHeader>
           <CardContent>
-            <form className="space-y-4">
+            <form className="space-y-4" action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value="4d9f7a62-4b12-487d-9ec3-199da11ea174" />
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">Full Name</label>
@@ -111,7 +112,7 @@ export const DealerSection = () => {
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">Email</label>
+                  <label htmlFor="email" className="text-sm font-medium">Email (Optional)</label>
                   <Input id="email" type="email" placeholder="Enter your email" />
                 </div>
                 <div className="space-y-2">
@@ -127,7 +128,7 @@ export const DealerSection = () => {
                 <label htmlFor="message" className="text-sm font-medium">Additional Information</label>
                 <Textarea id="message" placeholder="Tell us about your business and why you want to become a dealer" />
               </div>
-              <Button className="w-full group">
+              <Button className="w-full !bg-green-600 !text-white" type="submit" name="submit">
                 Submit Application
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>

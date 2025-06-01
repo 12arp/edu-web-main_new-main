@@ -97,7 +97,7 @@ export const HeroSection = () => {
               <span className="text-transparent px-2 bg-gradient-to-r from-green-400 to-lime-500 bg-clip-text drop-shadow-lg">
                 Sahu Metals
               </span>
-              <br />Your Trusted Agriculture Equipment Agency
+              <br />Your Trusted Agriculture Equipment Manufacturer
             </h1>
           </div>
 

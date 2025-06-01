@@ -22,7 +22,7 @@ const BACKEND_URL = 'https://sahu-final.onrender.com';
 
 const formSchema = z.object({
   name: z.string().min(2).max(255),
-  email: z.string().email(),
+  email: z.string().email().optional().or(z.literal('')),
   phone: z.string().min(10).max(15),
   message: z.string().min(10),
 });
@@ -212,7 +212,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 </button>
               </div>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} action="https://api.web3forms.com/submit" method="POST" className="space-y-4">
+                  <input type="hidden" name="access_key" value="4d9f7a62-4b12-487d-9ec3-199da11ea174" />
                   <FormField
                     control={form.control}
                     name="name"
@@ -278,7 +279,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     >
                       Cancel
                     </Button>
-                    <Button type="submit">Send Enquiry</Button>
+                    <Button 
+                      type="submit" 
+                      name="submit"
+                      className="!bg-green-600 !text-white"
+                    >
+                      Send Enquiry
+                    </Button>
                   </div>
                 </form>
               </Form>

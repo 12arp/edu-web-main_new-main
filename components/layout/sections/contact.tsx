@@ -31,7 +31,7 @@ import { Textarea } from "@/components/ui/textarea";
 const formSchema = z.object({
   firstName: z.string().min(2).max(255),
   lastName: z.string().min(2).max(255),
-  email: z.string().email(),
+  email: z.string().email().optional().or(z.literal('')),
   phone: z.string().min(10).max(15),
   message: z.string(),
 });
@@ -113,8 +113,11 @@ export const ContactSection = () => {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
+                action="https://api.web3forms.com/submit"
+                method="POST"
                 className="grid w-full gap-4 h-full"
               >
+                <input type="hidden" name="access_key" value="4d9f7a62-4b12-487d-9ec3-199da11ea174" />
                 <div className="flex flex-col md:!flex-row gap-4">
                   <FormField
                     control={form.control}
@@ -197,7 +200,7 @@ export const ContactSection = () => {
                     )}
                   />
                 </div>
-                <Button className="mt-auto">Send message</Button>
+                <Button className="mt-auto !bg-green-600 !text-white" type="submit" name="submit">Send message</Button>
               </form>
             </Form>
           </CardContent>
