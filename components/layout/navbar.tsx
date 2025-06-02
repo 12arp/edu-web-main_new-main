@@ -109,7 +109,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-4 left-0 right-0 z-50 bg-white w-[95%] md:w-[80%] lg:w-[85%] lg:max-w-screen-xl mx-auto border border-gray-200 rounded-xl flex justify-between items-center p-1.5 shadow-sm">
+      <header className="w-full bg-white border-b border-gray-200 flex justify-between items-center px-4 py-2 shadow-sm">
         <Link
           href="/"
           className="font-bold text-lg flex items-center space-x-2 hover:scale-105 transition-transform"
