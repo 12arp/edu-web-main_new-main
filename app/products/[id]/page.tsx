@@ -93,7 +93,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   }, [params.id]);
 
   if (loading) {
-    return <div className="text-center py-12">Loading product details...</div>;
+    return (
+      <div className="container py-12 flex justify-center items-center">
+        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   if (error) {

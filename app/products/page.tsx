@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FooterSection } from "@/components/layout/sections/footer";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowUp } from "lucide-react";
 
 const API_URL = 'https://sahu-final.onrender.com';
 
@@ -12,6 +12,23 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -106,6 +123,18 @@ export default function ProductsPage() {
           ))}
         </div>
       </section>
+      
+      {/* Scroll to top button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 p-3 rounded-full bg-primary text-white shadow-lg hover:bg-primary/80 transition-all duration-300 ${
+          showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
+        }`}
+        aria-label="Scroll to top"
+      >
+        <ArrowUp className="w-6 h-6" />
+      </button>
+
       <FooterSection />
     </>
   );
