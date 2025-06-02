@@ -38,7 +38,7 @@ export const ProductsSection = ({ limit }: { limit?: number }) => {
 
   if (loading) {
     return (
-      <section id="products" className="container pt-8 pb-10 sm:pt-12 sm:pb-16 mb-16 sm:mb-24">
+      <section id="products" className="container pt-8 pb-10 sm:pt-12 sm:pb-16 mb-16 sm:mb-24 bg-white">
         <div className="text-center text-lg">Loading products...</div>
       </section>
     );
@@ -46,14 +46,14 @@ export const ProductsSection = ({ limit }: { limit?: number }) => {
 
   if (error) {
     return (
-      <section id="products" className="container pt-8 pb-10 sm:pt-12 sm:pb-16 mb-16 sm:mb-24">
+      <section id="products" className="container pt-8 pb-10 sm:pt-12 sm:pb-16 mb-16 sm:mb-24 bg-white">
         <div className="text-center text-red-500">{error}</div>
       </section>
     );
   }
 
   return (
-    <section id="products" className="container pt-8 pb-10 sm:pt-12 sm:pb-16 mb-16 sm:mb-24">
+    <section id="products" className="container pt-8 pb-10 sm:pt-12 sm:pb-16 mb-16 sm:mb-24 bg-white">
       <p className="text-lg text-primary text-center mb-2 tracking-wider">Products</p>
       <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">Our Products</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full mx-auto">

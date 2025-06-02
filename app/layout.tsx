@@ -160,7 +160,7 @@ export default function RootLayout({
           src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
         />
       </head>
-      <body className={cn("min-h-screen bg-green-50", inter.className)}>
+      <body className={cn("min-h-screen bg-white", inter.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

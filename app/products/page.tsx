@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FooterSection } from "@/components/layout/sections/footer";
+import { ExternalLink } from "lucide-react";
 
 const API_URL = 'https://sahu-final.onrender.com';
 
@@ -84,6 +85,17 @@ export default function ProductsPage() {
                   >
                     Call Us
                   </a>
+                  {product.link && (
+                    <a
+                      href={product.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-1 rounded bg-blue-500 text-white text-sm shadow hover:bg-blue-600 transition flex items-center gap-1"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View Details
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

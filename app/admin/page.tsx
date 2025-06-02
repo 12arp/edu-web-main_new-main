@@ -17,6 +17,7 @@ interface Product {
   additionalImages: string[];
   features: string[];
   specifications: { name: string; value: string }[];
+  link: string;
 }
 
 const AdminPanel = () => {
@@ -28,13 +29,15 @@ const AdminPanel = () => {
     additionalImages: string[];
     features: string[];
     specifications: { name: string; value: string }[];
+    link: string;
   }>({
     title: '',
     description: '',
     image: '',
     additionalImages: [],
     features: [''],
-    specifications: [{ name: '', value: '' }]
+    specifications: [{ name: '', value: '' }],
+    link: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -67,7 +70,8 @@ const AdminPanel = () => {
       image: product.image,
       additionalImages: product.additionalImages || [],
       features: product.features || [''],
-      specifications: product.specifications || [{ name: '', value: '' }]
+      specifications: product.specifications || [{ name: '', value: '' }],
+      link: product.link || ''
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -215,7 +219,8 @@ const AdminPanel = () => {
           image: '',
           additionalImages: [],
           features: [''],
-          specifications: [{ name: '', value: '' }]
+          specifications: [{ name: '', value: '' }],
+          link: ''
         });
         setEditingProduct(null);
         fetchProducts();
@@ -237,7 +242,8 @@ const AdminPanel = () => {
       image: '',
       additionalImages: [],
       features: [''],
-      specifications: [{ name: '', value: '' }]
+      specifications: [{ name: '', value: '' }],
+      link: ''
     });
     setError(null);
     setSuccess(null);
@@ -277,6 +283,17 @@ const AdminPanel = () => {
                 onChange={handleChange} 
                 className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-primary/20 focus:border-primary" 
                 required 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block font-semibold">Product Link</label>
+              <input 
+                type="url" 
+                name="link" 
+                value={formData.link} 
+                onChange={handleChange} 
+                className="w-full border rounded-md px-4 py-2 focus:ring-2 focus:ring-primary/20 focus:border-primary" 
+                placeholder="https://example.com/product"
               />
             </div>
           </div>
