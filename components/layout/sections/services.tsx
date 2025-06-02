@@ -39,7 +39,7 @@ export const ProductsSection = ({ limit }: { limit?: number }) => {
   if (loading) {
     return (
       <section id="products" className="container pt-8 pb-10 sm:pt-12 sm:pb-16 mb-16 sm:mb-24 bg-white">
-        <div className="text-center text-lg">Loading products...</div>
+        <div className="text-center text-lg">...</div>
       </section>
     );
   }

@@ -34,7 +34,11 @@ export default function ProductsPage() {
   }, []);
 
   if (loading) {
-    return <div className="container py-16 text-center">Loading products...</div>;
+    return (
+      <div className="container py-16 flex justify-center items-center">
+        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   }
   if (error) {
     return <div className="container py-16 text-center text-red-500">{error}</div>;
