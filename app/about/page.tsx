@@ -5,7 +5,7 @@ import { FooterSection } from "@/components/layout/sections/footer";
 export default function AboutPage() {
   return (
     <>
-      <div className="container mx-auto py-24 md:py-32 px-4">
+      <div className="container mx-auto py-12 md:py-16 px-4">
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
