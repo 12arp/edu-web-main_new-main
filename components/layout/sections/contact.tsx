@@ -5,7 +5,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { Building2, Clock, Mail, Phone } from "lucide-react";
+import { Building2, Clock, Mail, Phone, Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -102,6 +102,28 @@ export const ContactSection = () => {
                 <div className="text-muted-foreground">
                   <div>Monday - Friday</div>
                   <div>8AM - 4PM</div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-6 h-6 text-primary mt-1 flex items-center justify-center">
+                <Facebook className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="font-bold text-lg mb-1">Follow us</div>
+                <div className="flex gap-4">
+                  <a href="https://facebook.com/sahumetals" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Facebook className="w-5 h-5" />
+                  </a>
+                  <a href="https://instagram.com/sahumetals" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                  <a href="https://youtube.com/@sahumetals" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Youtube className="w-5 h-5" />
+                  </a>
+                  <a href="https://linkedin.com/company/sahumetals" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Linkedin className="w-5 h-5" />
+                  </a>
                 </div>
               </div>
             </div>

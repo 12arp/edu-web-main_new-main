@@ -11,13 +11,14 @@ interface ProductItemProps {
   product: {
     _id: string;
     image?: string;
+    additionalImages?: string[];
     title: string;
     description?: string;
   };
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
-  const { _id, image, title } = product;
+  const { _id, image, additionalImages, title } = product;
 
   const getFullImageUrl = (imageUrl?: string) => {
     if (!imageUrl) return '/placeholder.png';
@@ -26,6 +27,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   };
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const images = [image, ...(additionalImages || [])].filter((img): img is string => !!img);
 
   return (
     <Link href={`/products/${_id}`} className="block group">
@@ -34,17 +36,42 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
           className="w-full h-72 flex items-center justify-center mb-3 rounded"
           style={{ backgroundColor: 'var(--background-color)' }}
         >
-          <Image
-            src={getFullImageUrl(image)}
-            alt={title}
-            width={320}
-            height={280}
-            className="object-contain w-auto h-64"
-            onError={(e: any) => {
-              e.target.src = '/placeholder.png';
-            }}
-          />
+          {images[selectedImageIndex] && (
+            <Image
+              src={getFullImageUrl(images[selectedImageIndex])}
+              alt={title}
+              width={320}
+              height={280}
+              className="object-contain w-auto h-64"
+              onError={(e: any) => {
+                e.target.src = '/placeholder.png';
+              }}
+            />
+          )}
         </div>
+        {images.length > 1 && (
+          <div className="flex gap-2 flex-wrap justify-center mb-3">
+            {images.map((img, index) => (
+              <button
+                key={index}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedImageIndex(index);
+                }}
+                className={`border rounded p-1 transition ${selectedImageIndex === index ? 'border-primary' : 'border-transparent'}`}
+                style={{ outline: 'none' }}
+              >
+                <Image
+                  src={getFullImageUrl(img)}
+                  alt={`${title} View ${index + 1}`}
+                  width={48}
+                  height={36}
+                  className="object-contain w-12 h-9"
+                />
+              </button>
+            ))}
+          </div>
+        )}
         <div className="w-full border-t border-gray-300 dark:border-gray-600 my-2"></div>
         <div className="w-full text-center">
           <h3 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">{title}</h3>

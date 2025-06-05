@@ -39,7 +39,9 @@ export const ProductsSection = ({ limit }: { limit?: number }) => {
   if (loading) {
     return (
       <section id="products" className="container pt-8 pb-10 sm:pt-12 sm:pb-16 mb-16 sm:mb-24 bg-white">
-        <div className="text-center text-lg">...</div>
+        <div className="flex justify-center items-center py-16">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        </div>
       </section>
     );
   }

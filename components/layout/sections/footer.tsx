@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { Building2, Mail, Phone } from "lucide-react";
+import { Building2, Mail, Phone, Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
 import Image from 'next/image';
 
 export const FooterSection = () => {
@@ -17,10 +17,11 @@ export const FooterSection = () => {
             <p className="text-sm text-muted-foreground">
               Your trusted partner in agricultural excellence since 1990. We&apos;re committed to empowering farmers with innovative equipment solutions and exceptional service.
             </p>
+            
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Building2 className="w-4 h-4 text-primary" />
-                <span className="text-sm">G -510(1st), IPIA, road no. 7, Anatpura, kota, Rajasthan, (Sahu metals)</span>
+                <span className="text-sm">G -510(1st), IPIA, road no. 7, Anatpura, kota, Rajasthan, (Sahu metals)</span>
               </div>
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Phone className="w-4 h-4 text-primary" />
@@ -28,13 +29,27 @@ export const FooterSection = () => {
               </div>
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Mail className="w-4 h-4 text-primary" />
-                <span className="text-sm">sahumetalskota@gmail.com </span>
+                <span className="text-sm">sahumetalskota@gmail.com</span>
+              </div>
+              <div className="flex items-center gap-4 justify-center md:justify-start mt-2">
+                <a href="https://facebook.com/sahumetals" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a href="https://instagram.com/sahumetals" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="https://youtube.com/@sahumetals" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Youtube className="w-5 h-5" />
+                </a>
+                <a href="https://linkedin.com/company/sahumetals" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
               </div>
             </div>
           </div>
 
           {/* Quick Links and Contact Support side by side */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-8">
             {/* Quick Links */}
             <div className="flex flex-col gap-4 text-center md:text-left">
               <h3 className="font-bold text-lg text-primary">Quick Links</h3>
@@ -64,9 +79,6 @@ export const FooterSection = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-muted-foreground">
           <span>&copy; 2024 Sahu Metals. All rights reserved.</span>
           <span>Made with ❤️ for Indian Agriculture</span>
-        </div>
-        
-        <div className="text-center text-sm text-muted-foreground">
           <Link 
             href="https://codientlabs.in" 
             target="_blank" 

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FooterSection } from "@/components/layout/sections/footer";
-import { ExternalLink, ArrowUp } from "lucide-react";
+import { ExternalLink, ArrowUp, Phone, MessageCircle } from "lucide-react";
 
 const API_URL = 'https://sahu-final.onrender.com';
 
@@ -13,6 +13,8 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [selectedImageIndices, setSelectedImageIndices] = useState<{ [key: string]: number }>({});
+  const [expandedContact, setExpandedContact] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +30,12 @@ export default function ProductsPage() {
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const getFullImageUrl = (imageUrl?: string) => {
+    if (!imageUrl) return '/placeholder.png';
+    if (imageUrl.startsWith('http')) return imageUrl;
+    return `${API_URL}${imageUrl}`;
   };
 
   useEffect(() => {
@@ -50,6 +58,18 @@ export default function ProductsPage() {
     fetchProducts();
   }, []);
 
+  const handleImageClick = (productId: string, index: number, e: React.MouseEvent) => {
+    e.preventDefault();
+    setSelectedImageIndices(prev => ({
+      ...prev,
+      [productId]: index
+    }));
+  };
+
+  const toggleContact = (productId: string) => {
+    setExpandedContact(expandedContact === productId ? null : productId);
+  };
+
   if (loading) {
     return (
       <div className="container py-16 flex justify-center items-center">
@@ -67,74 +87,112 @@ export default function ProductsPage() {
         <p className="text-primary text-center mb-2 tracking-wider">Products</p>
         <h2 className="text-3xl md:text-4xl text-center font-bold mb-8">Our Products</h2>
         <div className="flex flex-col gap-12">
-          {products.map((product, idx) => (
-            <div
-              key={product._id}
-              className={`grid md:grid-cols-2 gap-8 items-center ${idx % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
-            >
-              {/* Product Image */}
-              <div className="flex justify-center">
-                <Link href={`/products/${product._id}`}>
-                  <Image
-                    src={product.image?.startsWith('http') ? product.image : `https://sahu-final.onrender.com${product.image}`}
-                    alt={product.title}
-                    width={350}
-                    height={250}
-                    className="rounded-lg shadow-md object-contain bg-[#e6ffe6] cursor-pointer"
-                    style={{ minWidth: 300, minHeight: 200 }}
-                  />
-                </Link>
-              </div>
-              {/* Product Details */}
-              <div>
-                <h3 className="text-2xl font-bold mb-1">{product.title || 'Product Title'}</h3>
-                <p className="text-sm mb-2 text-gray-700">
-                  {product.description || 'Product discription should be added here. Some brief of the products for the quick overview of the product.'}
-                </p>
-                <div className="flex gap-2 flex-wrap">
-                  <a
-                    href="https://wa.me/919928398987?text=I%20have%20enquiry"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-1 rounded bg-green-500 text-white text-sm shadow hover:bg-green-600 transition"
-                  >
-                    WhatsApp
-                  </a>
-                  <a
-                    href="tel:+919928398987"
-                    className="px-4 py-1 rounded bg-primary text-white text-sm shadow hover:bg-primary/80 transition"
-                  >
-                    Call Us
-                  </a>
-                  {product.link && (
-                    <a
-                      href={product.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-1 rounded bg-blue-500 text-white text-sm shadow hover:bg-blue-600 transition flex items-center gap-1"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      View Details
-                    </a>
+          {products.map((product, idx) => {
+            const images = [product.image, ...(product.additionalImages || [])].filter((img): img is string => !!img);
+            const selectedIndex = selectedImageIndices[product._id] || 0;
+
+            return (
+              <div
+                key={product._id}
+                className={`grid md:grid-cols-2 gap-8 items-center ${idx % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
+              >
+                {/* Product Image */}
+                <div className="flex flex-col items-center">
+                  <div className="w-full h-64 flex items-center justify-center mb-4 bg-[#e6ffe6] rounded-lg">
+                    {images[selectedIndex] && (
+                      <Image
+                        src={getFullImageUrl(images[selectedIndex])}
+                        alt={product.title}
+                        width={100}
+                        height={190}
+                        className="object-contain w-auto h-56"
+                      />
+                    )}
+                  </div>
+                  {images.length > 1 && (
+                    <div className="flex gap-2 flex-wrap justify-center">
+                      {images.map((img, index) => (
+                        <button
+                          key={index}
+                          onClick={(e) => handleImageClick(product._id, index, e)}
+                          className={`border rounded p-1 transition ${selectedIndex === index ? 'border-primary' : 'border-transparent'}`}
+                          style={{ outline: 'none' }}
+                        >
+                          <Image
+                            src={getFullImageUrl(img)}
+                            alt={`${product.title} View ${index + 1}`}
+                            width={48}
+                            height={36}
+                            className="object-contain w-12 h-9"
+                          />
+                        </button>
+                      ))}
+                    </div>
                   )}
                 </div>
+                {/* Product Details */}
+                <div>
+                  <h3 className="text-2xl font-bold mb-1">{product.title || 'Product Title'}</h3>
+                  <p className="text-sm mb-2 text-gray-700">
+                    {product.description || 'Product discription should be added here. Some brief of the products for the quick overview of the product.'}
+                  </p>
+                  <div className="flex gap-2 flex-wrap">
+                    <button
+                      onClick={() => toggleContact(product._id)}
+                      className="px-4 py-1 rounded bg-primary text-white text-sm shadow hover:bg-primary/80 transition flex items-center gap-1"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      Contact Us
+                    </button>
+                    {expandedContact === product._id && (
+                      <>
+                        <a
+                          href="https://wa.me/919928398987?text=I%20have%20enquiry"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-1 rounded bg-green-500 text-white text-sm shadow hover:bg-green-600 transition flex items-center gap-1"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          WhatsApp
+                        </a>
+                        <a
+                          href="tel:+919928398987"
+                          className="px-4 py-1 rounded bg-blue-500 text-white text-sm shadow hover:bg-blue-600 transition flex items-center gap-1"
+                        >
+                          <Phone className="w-4 h-4" />
+                          Call Us
+                        </a>
+                      </>
+                    )}
+                    {product.link && (
+                      <a
+                        href={product.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-1 rounded bg-blue-500 text-white text-sm shadow hover:bg-blue-600 transition flex items-center gap-1"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        Brochure
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
       
       {/* Scroll to top button */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 p-3 rounded-full bg-primary text-white shadow-lg hover:bg-primary/80 transition-all duration-300 ${
-          showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-        }`}
-        aria-label="Scroll to top"
-      >
-        <ArrowUp className="w-6 h-6" />
-      </button>
-
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary/90 transition-colors"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
       <FooterSection />
     </>
   );
