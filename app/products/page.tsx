@@ -98,37 +98,38 @@ export default function ProductsPage() {
               >
                 {/* Product Image */}
                 <div className="flex flex-col items-center">
-                  <div className="w-full h-64 flex items-center justify-center mb-4 bg-[#e6ffe6] rounded-lg">
-                    {images[selectedIndex] && (
-                      <Image
-                        src={getFullImageUrl(images[selectedIndex])}
-                        alt={product.title}
-                        width={100}
-                        height={190}
-                        className="object-contain w-auto h-56"
-                      />
-                    )}
-                  </div>
-                  {images.length > 1 && (
-                    <div className="flex gap-2 flex-wrap justify-center">
-                      {images.map((img, index) => (
-                        <button
-                          key={index}
-                          onClick={(e) => handleImageClick(product._id, index, e)}
-                          className={`border rounded p-1 transition ${selectedIndex === index ? 'border-primary' : 'border-transparent'}`}
-                          style={{ outline: 'none' }}
-                        >
-                          <Image
-                            src={getFullImageUrl(img)}
-                            alt={`${product.title} View ${index + 1}`}
-                            width={48}
-                            height={36}
-                            className="object-contain w-12 h-9"
-                          />
-                        </button>
-                      ))}
+                  <Link href={`/products/${product._id}`} className="w-full">
+                    <div className="w-full h-64 flex items-center justify-center mb-4 bg-[#e6ffe6] rounded-lg cursor-pointer hover:bg-[#d6ffd6] transition-colors">
+                      {images[selectedIndex] && (
+                        <Image
+                          src={getFullImageUrl(images[selectedIndex])}
+                          alt={product.title}
+                          width={100}
+                          height={190}
+                          className="object-contain w-auto h-56"
+                        />
+                      )}
                     </div>
-                  )}
+                  </Link>
+                  
+                  <div className="flex gap-2 flex-wrap justify-center">
+                    {images.map((img, index) => (
+                      <button
+                        key={index}
+                        onClick={(e) => handleImageClick(product._id, index, e)}
+                        className={`border rounded p-1 transition ${selectedIndex === index ? 'border-primary' : 'border-transparent'}`}
+                        style={{ outline: 'none' }}
+                      >
+                        <Image
+                          src={getFullImageUrl(img)}
+                          alt={`${product.title} View ${index + 1}`}
+                          width={48}
+                          height={36}
+                          className="object-contain w-12 h-9"
+                        />
+                      </button>
+                    ))}
+                  </div>
                 </div>
                 {/* Product Details */}
                 <div>

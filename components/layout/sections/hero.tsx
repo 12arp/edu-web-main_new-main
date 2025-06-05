@@ -85,7 +85,7 @@ export const HeroSection = () => {
 
       {/* Content */}
       <div className="container mx-auto px-4 h-full flex items-center">
-        <div className="text-center lg:text-left space-y-8 w-full max-w-3xl pt-20 md:pt-0">
+        <div className="text-center lg:text-left space-y-8 w-full max-w-3xl pt-20 md:pt-0 md:mt-32">
           <Badge variant="outline" className="text-sm py-2 drop-shadow-md text-white border-white">
             <span className="mr-2 text-primary">
               <Badge className="bg-green-600 text-white">New</Badge>

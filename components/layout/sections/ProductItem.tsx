@@ -33,7 +33,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     <Link href={`/products/${_id}`} className="block group">
       <div className="bg-muted/60 dark:bg-card rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col items-center p-4 h-full">
         <div
-          className="w-full h-72 flex items-center justify-center mb-3 rounded"
+          className="w-full h-72 flex items-center justify-center mb-3 rounded cursor-pointer"
           style={{ backgroundColor: 'var(--background-color)' }}
         >
           {images[selectedImageIndex] && (
@@ -50,12 +50,13 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
           )}
         </div>
         {images.length > 1 && (
-          <div className="flex gap-2 flex-wrap justify-center mb-3">
+          <div className="flex gap-2 flex-wrap justify-center mb-3" onClick={(e) => e.stopPropagation()}>
             {images.map((img, index) => (
               <button
                 key={index}
                 onClick={(e) => {
                   e.preventDefault();
+                  e.stopPropagation();
                   setSelectedImageIndex(index);
                 }}
                 className={`border rounded p-1 transition ${selectedImageIndex === index ? 'border-primary' : 'border-transparent'}`}

@@ -109,10 +109,10 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="w-full bg-white border-b border-gray-200 flex justify-between items-center px-4 py-2 shadow-sm">
+      <header className="w-full bg-white border-b border-gray-200 flex justify-between items-center px-4 py-2 shadow-sm sticky top-0 z-50">
         <Link
           href="/"
-          className="font-bold text-lg flex items-center space-x-2 hover:scale-105 transition-transform"
+          className="font-bold text-lg flex items-center space-x-2 hover:scale-105 transition-transform md:ml-8 lg:ml-16"
         >
           <Image src={LOGO_PATH} alt="Sahu Metals Logo" width={36} height={36} className="rounded-lg" />
           <span className="text-foreground">Sahu Metals</span>
@@ -160,7 +160,7 @@ export const Navbar = () => {
               </div>
 
               <div className="mt-auto border-t border-secondary">
-                <div className="flex flex-col gap-2 p-4">
+                <div className="flex flex-col gap-2 p-4 md:pr-16 lg:pr-24">
                   <Link
                     href={WHATSAPP_LINK}
                     target="_blank"
@@ -248,38 +248,27 @@ export const Navbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden lg:flex items-center space-x-4">
-          {isLoggedIn && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleLogout}
-              className="text-destructive hover:text-destructive/90 hover:bg-destructive/10"
-            >
-              <LogoutIcon className="h-4 w-4 mr-2" />
-              Logout
-            </Button>
-          )}
+        <div className="hidden lg:flex items-center gap-4 mr-16">
           <Link
             href={WHATSAPP_LINK}
             target="_blank"
-            className="transition-transform hover:scale-105"
+            className="flex items-center gap-2 text-sm hover:text-primary transition bg-muted/50 p-3 rounded-lg"
           >
             <Image
               src={WHATSAPP_ICON}
               alt="WhatsApp"
-              width={40}
+              width={24}
               height={24}
               className="rounded-md"
             />
+            <span>WhatsApp Support</span>
           </Link>
           <a
             href={`tel:${PHONE_NUMBER}`}
-            className="transition-transform hover:scale-110"
+            className="flex items-center gap-2 text-sm hover:text-primary transition bg-muted/50 p-3 rounded-lg"
           >
-            <Button variant="ghost" size="icon">
-              <Phone className="h-5 w-5" />
-            </Button>
+            <Phone className="h-5 w-5" />
+            <span>Call Us</span>
           </a>
         </div>
       </header>
