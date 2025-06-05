@@ -84,17 +84,17 @@ export const HeroSection = () => {
       </button>
 
       {/* Content */}
-      <div className="relative z-10 grid place-items-start lg:max-w-screen-xl gap-8 mx-auto py-32 md:py-40 px-4 text-white">
-        <div className="text-center lg:text-left space-y-8 w-full max-w-3xl">
+      <div className="container mx-auto px-4 h-full flex items-center">
+        <div className="text-center lg:text-left space-y-8 w-full max-w-3xl pt-20 md:pt-0">
           <Badge variant="outline" className="text-sm py-2 drop-shadow-md text-white border-white">
             <span className="mr-2 text-primary">
               <Badge className="bg-green-600 text-white">New</Badge>
             </span>
-            <span> Leading Agriculture Equipment Solutions </span>
+            <span className="text-white"> Leading Agriculture Equipment Solutions </span>
           </Badge>
 
           <div className="max-w-screen-md text-center lg:text-left text-2xl sm:text-3xl md:text-6xl font-bold">
-            <h1 className="drop-shadow-lg">
+            <h1 className="drop-shadow-lg text-white">
               Welcome to
               <span className="text-transparent px-2 bg-gradient-to-r from-green-400 to-lime-500 bg-clip-text drop-shadow-lg">
                 Sahu Metals
@@ -103,7 +103,7 @@ export const HeroSection = () => {
             </h1>
           </div>
 
-          <p className="max-w-screen-sm text-center lg:text-left text-base sm:text-lg md:text-xl text-gray-250 drop-shadow-md">
+          <p className="max-w-screen-sm text-center lg:text-left text-base sm:text-lg md:text-xl text-white drop-shadow-md">
             Supplying top-quality tractors, planters, harvesters, and more. Reliable sales, leasing, and maintenance for all your farming needs.
           </p>
 
